@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calidad de agua subterránea</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#eef3f3;--fg:#13262b;--mut:#5b6e72;--card:#fff;--line:#cdd9d9;--acc:#0b6b7a;--hd:#e3edec}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b1619;--fg:#e4eeee;--mut:#8fa5a8;--card:#14252a;--line:#2b4146;--acc:#4cc2d4;--hd:#1c3036}}
+:root[data-theme="dark"]{--bg:#0b1619;--fg:#e4eeee;--mut:#8fa5a8;--card:#14252a;--line:#2b4146;--acc:#4cc2d4;--hd:#1c3036}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:640px;margin:0 auto;padding:16px 14px 110px}
+h1{font:600 26px/1.2 Georgia,"Times New Roman",serif;margin:4px 0 4px}
+h2{font:600 16px/1.3 system-ui,sans-serif;margin:18px 0 8px}
+.s,.note{color:var(--mut);font-size:14px;margin:0 0 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+input,select,button{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;min-height:44px}
+input[type=text],input[type=date]{width:100%;margin-top:8px}
+input.big{font-size:20px;font-weight:600;margin:0}
+button{cursor:pointer;background:var(--acc);color:#fff;border-color:var(--acc);font-weight:600}
+button.o{background:none;color:var(--acc)}
+button.d{background:none;color:#b42318;border-color:#b42318}
+button.w{width:100%;margin-top:10px}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.chip{display:inline-block;color:#fff;border-radius:12px;padding:2px 10px;font-size:13px;font-weight:600;white-space:nowrap}
+.c0,.c-1{background:#1b7f3b}.c1{background:#4d7f1a}.c2{background:#8f5f0c}.c3{background:#b4520b}.c4{background:#b42318}.cn{background:#5f6b6e}
+.badge{font-size:12px;border:1px solid var(--acc);color:var(--acc);border-radius:10px;padding:1px 8px}
+.wc{cursor:pointer}.wc.sel{border-color:var(--acc);box-shadow:0 0 0 2px var(--acc)}
+.prog{height:6px;background:var(--hd);border-radius:3px;margin-top:8px;overflow:hidden}
+.prog i{display:block;height:100%;background:var(--acc);transition:width .25s}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:10px 0;overflow:hidden}
+summary{padding:14px;font-weight:600;cursor:pointer;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"▾";color:var(--mut)}details[open] summary::after{content:"▴"}
+.fl{display:grid;grid-template-columns:1fr 110px auto;gap:8px;align-items:center;padding:6px 14px;border-top:1px solid var(--line)}
+.fl small{display:block;color:var(--mut);font-size:12px}
+.fl input{width:110px}.lc{min-width:70px;text-align:right}
+.sw{display:flex;gap:10px;align-items:center;margin-top:10px}.sw input{width:22px;height:22px;min-height:0}
+.fab{width:100%;margin-top:6px}
+.ring{display:flex;justify-content:center;margin:6px 0}
+.sel2{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px}.sel2 button{flex:none;min-height:38px;background:var(--card);color:var(--fg);border-color:var(--line)}.sel2 button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.pr{margin:10px 0}.pr .t{display:flex;justify-content:space-between;font-size:14px;gap:8px}
+.bar{position:relative;height:10px;background:var(--hd);border-radius:5px;margin-top:4px}
+.bar i{display:block;height:100%;border-radius:5px}.bar u{position:absolute;top:-3px;bottom:-3px;left:66.67%;width:2px;background:var(--fg);opacity:.55}
+.lg{display:grid;grid-template-columns:1fr repeat(4,64px);gap:4px;align-items:center;margin:8px 0;font-size:14px}
+.lg input{width:64px;padding:6px 4px;font-size:15px;text-align:center}
+.warn{border-left:3px solid #b4520b;padding:2px 10px;margin:8px 0;font-size:14px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;background:none;border:0;border-radius:0;color:var(--mut);padding:6px 0;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:0;min-height:58px}
+nav button b{font-size:21px;font-weight:400}nav button.on{color:var(--acc);font-weight:700}
+.rf{display:grid;grid-template-columns:1fr 110px;gap:8px;align-items:center;margin:8px 0}.rf input{width:110px}
+</style></head>
+<body><main id="v"></main>
+<nav><button data-v="pozos"><b>💧</b>Pozos</button><button data-v="datos"><b>🧪</b>Datos</button><button data-v="resultados"><b>📊</b>Resultados</button><button data-v="limites"><b>⚙️</b>Referencias</button></nav>
+<script>
+const $=s=>document.querySelector(s),f=x=>parseFloat(x);
+const IN1=[['ph','pH','u pH'],['no3','Nitratos','mg/L'],['cl','Cloruros','mg/L'],['ca','Calcio','mg/L'],['mg','Magnesio','mg/L'],['na','Sodio','mg/L'],['fe','Hierro','mg/L'],['mn','Manganeso','mg/L'],['as','Arsénico','mg/L'],['pb','Plomo','mg/L'],['cd','Cadmio','mg/L'],['ce','Conductividad eléctrica','µS/cm']];
+const IN2=[['cec','Conductividad compensada (25 °C)','µS/cm'],['tds','TDS','mg/L'],['k','Potasio','mg/L'],['t','Temperatura','°C'],['phmv','Potencial del electrodo de pH','mV'],['orp','ORP','mV'],['od','OD','mg/L'],['sal','Salinidad','ppt'],['res','Resistividad','Ω·cm'],['pres','Presión atmosférica','hPa']];
+const REF=[['no3','Nitratos','mg/L','50','ECA A1'],['cl','Cloruros','mg/L','250','ECA A1'],['na','Sodio','mg/L','200','D.S. 031'],['dur','Dureza total (Ca+Mg)','mg/L CaCO₃','500','D.S. 031'],['fe','Hierro','mg/L','0.3','ECA A1'],['mn','Manganeso','mg/L','0.4','ECA A1'],['as','Arsénico','mg/L','0.01','ECA A1'],['pb','Plomo','mg/L','0.01','D.S. 031'],['cd','Cadmio','mg/L','0.003','ECA A1'],['ce','Conductividad eléctrica','µS/cm','1500','ECA A1'],['cec','Conductividad compensada','µS/cm','1500','ECA A1'],['tds','TDS','mg/L','1000','D.S. 031']];
+const DEF={};REF.forEach(x=>DEF[x[0]]=x[3]);
+const MET=['fe','mn','as','pb','cd'],VIEWS=['pozos','datos','resultados','limites'],KEYS=['ph','no3','cl','na','dur','fe','mn','as','pb','cd','min'];
+const nm={dur:'Dureza total'};[...IN1,...IN2].forEach(p=>nm[p[0]]=p[1]);
+let S={wells:[],L:Object.assign({},DEF),pmin:'6.5',pmax:'8.5',fac:'2',cur:0};
+try{const d=JSON.parse(localStorage.getItem('gwqi2')||'null');if(d&&d.wells)S=Object.assign(S,d);else{const o=JSON.parse(localStorage.getItem('gwqi1')||'null');if(o&&o.wells)S.wells=o.wells}}catch(e){}
+const save=()=>{try{localStorage.setItem('gwqi2',JSON.stringify(S))}catch(e){}};
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const chip=r=>r==null?'':r?'<span class="chip c4">Excede</span>':'<span class="chip c0">Cumple</span>';
+const W=()=>S.wells[S.cur];
+const minKey=w=>['ce','cec','tds'].find(k=>!isNaN(f(w.v[k])))||null;
+function cat(w,k){const v=q=>f(w.v[q]);let key=k;if(k==='min')key=minKey(w)||'ce';
+ const val=k==='dur'?((isNaN(v('ca'))||isNaN(v('mg')))?NaN:2.497*v('ca')+4.118*v('mg')):v(key);let r=null,lim=f(S.L[key]);
+ if(!isNaN(val)){if(k==='ph')r=(val<f(S.pmin)||val>f(S.pmax))?1:0;else if(!isNaN(lim))r=val>lim?1:0}
+ return{k,key,n:k==='min'?nm[key]:nm[k],val,r,lim}}
+function ev(w){const rows=KEYS.map(k=>cat(w,k)),ok=rows.filter(x=>x.r!=null),ex=ok.filter(x=>x.r===1).length;
+ const miss=[['ph','pH'],['no3','Nitratos'],['cl','Cloruros'],['ca','Calcio'],['mg','Magnesio'],['na','Sodio'],['fe','Hierro'],['mn','Manganeso'],['as','Arsénico'],['pb','Plomo'],['cd','Cadmio']].filter(x=>isNaN(f(w.v[x[0]]))).map(x=>x[1]);
+ if(!minKey(w))miss.push('Conductividad (o TDS)');
+ return{rows,ok:ok.length,tot:KEYS.length,ex,miss,all:ok.length?(ex?1:0):null}}
+const mean=(k,refs)=>{const a=refs.map(w=>f(w.v[k])).filter(x=>!isNaN(x));return a.length?a.reduce((s,x)=>s+x,0)/a.length:NaN};
+function diag(w,e){const fac=f(S.fac)||2,refs=S.wells.filter(x=>x.ref),an=[];
+ if(!w.ref){MET.forEach(k=>{const x=f(w.v[k]);if(isNaN(x))return;const lim=f(S.L[k]),m=mean(k,refs);
+  if(!isNaN(lim)&&x>lim)an.push([1,nm[k]+' supera el límite de referencia ('+x+' mg/L)']);
+  else if(!isNaN(m)&&m>0&&x>fac*m)an.push([1,nm[k]+' está '+(x/m).toFixed(1)+' veces sobre el fondo'])});
+  const ph=f(w.v.ph),mp=mean('ph',refs);if(!isNaN(ph)&&!isNaN(mp)&&Math.abs(ph-mp)>1)an.push([0,'El pH difiere '+(ph-mp).toFixed(1)+' unidades del fondo']);
+  const mk=minKey(w);if(mk){const c=f(w.v[mk]),mc=mean(mk,refs);if(!isNaN(mc)&&mc>0&&c>fac*mc)an.push([0,nm[mk]+' está '+(c/mc).toFixed(1)+' veces sobre el fondo'])}}
+ let dx;
+ if(w.ref)dx='Pozo de referencia: define el fondo hidrogeoquímico y no se diagnostica.';
+ else if(e.all==null)dx='Aún no hay datos suficientes para el diagnóstico.';
+ else if(!MET.some(k=>!isNaN(f(w.v[k]))))dx='No hay metales medidos: no se puede evaluar influencia minera.';
+ else{const bad=e.all===1,met=an.some(a=>a[0]);
+  dx=bad&&met?'Calidad deteriorada y posible influencia minera que requiere investigación.':bad?'Deterioro fisicoquímico sin evidencia suficiente de influencia minera.':met?'Posible contaminación localizada que el índice general no debe ocultar.':'Sin alteraciones detectadas con los parámetros disponibles.';
+  if(!refs.length)dx+=' Sin pozos de referencia solo se compara con los límites.'}
+ return{dx,an}}
+const empty=t=>`<h1>${t}</h1><div class="card"><p>Primero agrega un pozo.</p><button class="w" id="nw">＋ Nuevo pozo</button></div>`;
+const st=e=>e.all==null?'<span class="chip cn">Sin evaluar</span>':e.all?`<span class="chip c4">Excede en ${e.ex}</span>`:'<span class="chip c0">Cumple todo</span>';
+function vPozos(){let h='<h1>Pozos</h1><p class="s">Toca un pozo para cargar sus datos. Todo se guarda en este dispositivo.</p>';
+ h+=S.wells.map((w,i)=>{const e=ev(w);return`<div class="card wc ${i==S.cur?'sel':''}" data-open="${i}"><div class="row"><b>${esc(w.name)}</b>${w.ref?'<span class="badge">Referencia</span>':''}<span style="margin-left:auto">${st(e)}</span></div><div class="note" style="margin:4px 0 0">${w.fecha||'Sin fecha'} · ${e.ok} de ${e.tot} parámetros</div><div class="prog"><i style="width:${e.ok/e.tot*100}%"></i></div></div>`}).join('');
+ return h+'<button class="fab" id="nw">＋ Nuevo pozo</button>'}
+function fld(w,p){const lim=p[0]==='ph'?S.pmin+'–'+S.pmax:(S.L[p[0]]?'≤ '+S.L[p[0]]:'');
+ return`<label class="fl"><span>${p[1]}<small>${p[2]}${lim?' · ref. '+lim:''}</small></span><input type="number" inputmode="decimal" step="any" data-k="${p[0]}" value="${w.v[p[0]]??''}"><span class="lc" id="ch-${p[0]}"></span></label>`}
+function vDatos(){if(!S.wells.length)return empty('Datos');const w=W();
+ let h=`<h1>Datos</h1><div class="card"><input type="text" class="big" data-f="name" value="${esc(w.name)}" aria-label="Nombre del pozo"><input type="date" data-f="fecha" value="${w.fecha}" aria-label="Fecha de campaña"><label class="sw"><input type="checkbox" data-f="ref" ${w.ref?'checked':''}>Pozo de referencia (sin influencia minera aparente)</label><div class="prog"><i id="pb"></i></div><div class="note" id="pt" style="margin:6px 0 0"></div><div class="note" id="ms" style="margin:2px 0 0"></div></div>
+ <details open><summary>1. Para el índice (11)</summary>`;
+ IN1.forEach(p=>{h+=fld(w,p);if(p[0]==='mg')h+=`<div class="fl"><span>Dureza total (calculada)<small>mg/L CaCO₃ · ref. ≤ ${S.L.dur}</small></span><b id="dv">—</b><span class="lc" id="ch-dur"></span></div>`});
+ h+=`<p class="note" style="padding:0 14px">Si mides más de un indicador de mineralización, se usa el primero disponible: CE, luego CE compensada, luego TDS.</p></details><details><summary>2. Complementarios (opcional)</summary>`;
+ IN2.forEach(p=>h+=fld(w,p));
+ return h+'<p class="note" style="padding:0 14px">Ayudan a interpretar el pozo, pero no entran al índice.</p></details><button class="w" data-go="resultados">Ver resultados</button><button class="w d" id="del">Eliminar este pozo</button>'}
+function upd(){const w=W(),e=ev(w),mk=minKey(w);
+ ['ph','no3','cl','na','fe','mn','as','pb','cd','ce','cec','tds'].forEach(k=>{const el=$('#ch-'+k);if(!el)return;
+  if(['ce','cec','tds'].includes(k)){const c=cat(w,'min');el.innerHTML=c.key===k&&mk?chip(c.r):(k!=='ce'&&mk?'<span class="note">no se usa</span>':'');return}
+  el.innerHTML=chip(cat(w,k).r)});
+ const d=cat(w,'dur');if($('#dv')){$('#dv').textContent=isNaN(d.val)?'—':+d.val.toFixed(1);$('#ch-dur').innerHTML=chip(d.r)}
+ if($('#pb')){$('#pb').style.width=e.ok/e.tot*100+'%';$('#pt').textContent=e.ok+' de '+e.tot+' parámetros del índice';$('#ms').textContent=e.miss.length?'Falta: '+e.miss.join(', '):'Listo: el índice está completo.'}}
+function vRes(){if(!S.wells.length)return empty('Resultados');const w=W(),e=ev(w),d=diag(w,e);
+ let h='<h1>Resultados</h1><div class="sel2">'+S.wells.map((x,i)=>`<button data-sel="${i}" class="${i==S.cur?'on':''}">${esc(x.name)}</button>`).join('')+'</div>';
+ const C=2*Math.PI*52,col=e.all==null?'var(--line)':e.ex?'#b42318':'#1b7f3b',pct=e.ok?(e.ok-e.ex)/e.ok:0;
+ h+=`<div class="card"><div class="ring"><svg viewBox="0 0 130 130" width="160" height="160" role="img" aria-label="Parámetros que cumplen"><circle cx="65" cy="65" r="52" fill="none" stroke="var(--line)" stroke-width="12"/><circle cx="65" cy="65" r="52" fill="none" stroke="${col}" stroke-width="12" stroke-linecap="round" stroke-dasharray="${C*pct} ${C}" transform="rotate(-90 65 65)"/><text x="65" y="64" text-anchor="middle" font-size="16" font-weight="700" fill="var(--fg)">${e.all==null?'Sin datos':e.ex?'Excede':'Cumple'}</text><text x="65" y="84" text-anchor="middle" font-size="11" fill="var(--mut)">${e.ok-e.ex} de ${e.ok} cumplen</text></svg></div>
+ ${e.miss.length&&e.ok?'<div class="warn">Faltan: '+e.miss.join(', ')+'. No compares este pozo con otros que tengan un conjunto distinto de parámetros.</div>':''}</div>
+ <div class="card"><b>Diagnóstico</b><p style="margin:6px 0">${d.dx}</p>${d.an.length?'<ul style="margin:0;padding-left:20px">'+d.an.map(a=>'<li>'+a[1]+'</li>').join('')+'</ul>':''}</div><h2>Por parámetro</h2>`;
+ h+=e.rows.map(x=>{if(x.r==null)return`<div class="pr"><div class="t"><span>${x.n}</span><span class="note" style="margin:0">no medido</span></div></div>`;
+  const rf=x.k==='ph'?S.pmin+'–'+S.pmax:'≤ '+x.lim,bar=x.k!=='ph'?`<div class="bar"><i class="${x.r?'c4':'c0'}" style="width:${Math.min(x.val/x.lim,1.5)/1.5*100}%"></i><u></u></div>`:'';
+  return`<div class="pr"><div class="t"><span>${x.n}: <b>${+x.val.toFixed(4)}</b> <span class="note">(ref. ${rf})</span></span>${chip(x.r)}</div>${bar}</div>`}).join('');
+ return h+'<p class="note">La marca vertical indica el límite de referencia. El resultado indica calidad fisicoquímica y posibles anomalías; no demuestra causalidad minera.</p>'}
+const tag=x=>S.L[x[0]]===x[3]?x[4]:'personalizado';
+function vLim(){let h=`<h1>Referencias</h1><p class="s">Cada parámetro tiene un solo límite: el ECA para agua (D.S. N.° 004-2017-MINAM, Categoría 1-A1, agua que se potabiliza con desinfección). Donde no recuperé un valor ECA se usa el D.S. 031-2010-SA. Son referencias comparativas, no estándares específicos de agua subterránea. Verifícalas contra la norma oficial.</p>
+ <div class="card"><b>pH aceptable</b> <span class="note">ECA A1</span><div class="row" style="margin-top:8px"><input type="number" id="pmin" inputmode="decimal" step="any" value="${S.pmin}" style="width:90px"> a <input type="number" id="pmax" inputmode="decimal" step="any" value="${S.pmax}" style="width:90px"></div></div><div class="card">`;
+ REF.forEach(x=>{h+=`<div class="rf"><span>${x[1]}<br><span class="note" style="margin:0">${x[2]} · <span id="sr-${x[0]}">${tag(x)}</span></span></span><input type="number" inputmode="decimal" step="any" data-l="${x[0]}" value="${S.L[x[0]]}" aria-label="Límite de ${x[1]}"></div>`});
+ return h+`</div><div class="card"><label>Factor de anomalía respecto al fondo<br><input type="number" id="fac" inputmode="decimal" step="0.5" min="1" value="${S.fac}" style="width:100%"></label><p class="note" style="margin:6px 0 0">Un valor se marca como anómalo si supera este factor veces el promedio de los pozos de referencia.</p></div>
+ <button class="w o" id="rs">Restablecer límites originales</button><button class="w d" id="rst">Borrar todos los datos</button>`}
+function render(){let v=location.hash.slice(1);if(!VIEWS.includes(v))v='pozos';
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
+ $('#v').innerHTML={pozos:vPozos,datos:vDatos,resultados:vRes,limites:vLim}[v]();
+ if(v==='datos'&&S.wells.length)upd()}
+function go(v){if(location.hash==='#'+v){render();window.scrollTo(0,0)}else{location.hash=v}}
+function addWell(){S.wells.push({name:'Pozo '+(S.wells.length+1),fecha:'',ref:false,v:{}});S.cur=S.wells.length-1;save();go('datos')}
+let armed=null;
+function twice(b,txt,fn){if(armed===b){fn();armed=null;return}armed=b;const o=b.textContent;b.textContent=txt;setTimeout(()=>{if(armed===b){armed=null;b.textContent=o}},3000)}
+const V=$('#v');
+V.addEventListener('input',e=>{const t=e.target,w=S.wells[S.cur];
+ if(t.dataset.k){w.v[t.dataset.k]=t.value;upd()}
+ else if(t.dataset.f){w[t.dataset.f]=t.type==='checkbox'?t.checked:t.value}
+ else if(t.dataset.l){S.L[t.dataset.l]=t.value;const x=REF.find(r=>r[0]===t.dataset.l);$('#sr-'+x[0]).textContent=tag(x)}
+ else if(t.id==='pmin')S.pmin=t.value;else if(t.id==='pmax')S.pmax=t.value;else if(t.id==='fac')S.fac=t.value;
+ save()});
+V.addEventListener('click',e=>{const t=e.target.closest('[data-open],[data-sel],[data-go],#nw,#del,#rs,#rst');if(!t)return;
+ if(t.dataset.open!==undefined){S.cur=+t.dataset.open;save();go('datos')}
+ else if(t.dataset.sel!==undefined){S.cur=+t.dataset.sel;save();render()}
+ else if(t.dataset.go)go(t.dataset.go);
+ else if(t.id==='nw')addWell();
+ else if(t.id==='del')twice(t,'Toca otra vez para confirmar',()=>{S.wells.splice(S.cur,1);S.cur=0;save();go('pozos')});
+ else if(t.id==='rs'){S.L=Object.assign({},DEF);S.pmin='6.5';S.pmax='8.5';save();render()}
+ else if(t.id==='rst')twice(t,'Toca otra vez para borrar todo',()=>{try{localStorage.removeItem('gwqi2');localStorage.removeItem('gwqi1')}catch(e){}location.hash='pozos';location.reload()})});
+document.querySelector('nav').addEventListener('click',e=>{const b=e.target.closest('button');if(b)go(b.dataset.v)});
+addEventListener('hashchange',()=>{render();window.scrollTo(0,0)});
+render();
+</script></body></html>
